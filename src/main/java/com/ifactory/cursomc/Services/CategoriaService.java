@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.spel.support.ReflectivePropertyAccessor.OptimalPropertyAccessor;
 import org.springframework.stereotype.Service;
 
+import com.ifactory.cursomc.Services.Exceptions.ObjectNotFoundException;
 import com.ifactory.cursomc.domain.Categoria;
 import com.ifactory.cursomc.repositories.CategoriaRepository;
 
@@ -17,7 +18,7 @@ public class CategoriaService {
 	
 	public Categoria buscar(Integer id) {
 		Optional<Categoria> obj = repo.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(    "Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName())); 
 	}
 
 }
