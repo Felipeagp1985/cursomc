@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.ifactory.cursomc.Services.Exceptions.DataIntegratyException;
 import com.ifactory.cursomc.Services.Exceptions.ObjectNotFoundException;
 import com.ifactory.cursomc.domain.Categoria;
+import com.ifactory.cursomc.dto.CategoriaDTO;
 import com.ifactory.cursomc.repositories.CategoriaRepository;
 
 @Service
@@ -53,6 +54,10 @@ public class CategoriaService {
 	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
+	}
+	
+	public Categoria fromDTO(CategoriaDTO objDto) {
+		return new Categoria(objDto.getId(), objDto.getNome());
 	}
 
 }
