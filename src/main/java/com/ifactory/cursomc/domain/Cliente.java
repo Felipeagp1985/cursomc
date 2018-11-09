@@ -33,6 +33,9 @@ public class Cliente implements Serializable{
 	private String cnpjOuCpf;
 	private Integer tipoCliente;
 	
+	@JsonIgnore
+	private String senha;
+
 	@OneToMany(mappedBy="cliente", cascade=CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
 	
@@ -48,13 +51,14 @@ public class Cliente implements Serializable{
 		
 	}
 
-	public Cliente(Integer id, String nome, String email, String cnpjOuCpf, TipoCliente tipoCliente) {
+	public Cliente(Integer id, String nome, String email, String cnpjOuCpf, TipoCliente tipoCliente, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.cnpjOuCpf = cnpjOuCpf;
 		this.tipoCliente = (tipoCliente == null) ? null : tipoCliente.getCod();
+		this.senha = senha;
 	}
 
 	public Integer getId() {
@@ -63,6 +67,14 @@ public class Cliente implements Serializable{
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public String getNome() {
